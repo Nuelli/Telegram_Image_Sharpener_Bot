@@ -3,7 +3,7 @@ import telebot
 from PIL import Image, ImageFilter
 
 # Replace with your Telegram bot token (get from BotFather)
-BOT_TOKEN = "5756347206:AAE-8TD1qV8bDGM1w8djLG2woIHzqv6k_U0"
+BOT_TOKEN = "6962643767:AAGhDTqFYt2rI_9OVWtGxGOdSr4I0uKsof8"
 
 # Create a Telegram bot instance
 bot = telebot.TeleBot(BOT_TOKEN)
