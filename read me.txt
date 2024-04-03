@@ -1,0 +1,4 @@
+Clone to your Pycharm IDE
+install telebot package, on your terminal
+
+run "pip install Pillow" on the terminal for the PIL packages
