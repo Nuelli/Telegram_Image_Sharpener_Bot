@@ -1,43 +1,25 @@
-import telegram
+import telebot
+from translate import Translator
 
-# Replace with your Telegram bot token
-BOT_TOKEN = "5756347206:AAE-8TD1qV8bDGM1w8djLG2woIHzqv6k_U0"
+# Telegram Bot Token
+TOKEN = '5756347206:AAE-8TD1qV8bDGM1w8djLG2woIHzqv6k_U0'
 
-# Basic translation rules (modify for your desired languages and rules)
-translations = {
-    "hello": {"es": "hola", "fr": "bonjour"},
-    "goodbye": {"es": "adiós", "fr": "au revoir"},
-    "thank you": {"es": "gracias", "fr": "merci"},
-}
+# Creating bot instance
+bot = telebot.TeleBot(TOKEN)
 
-def translate(text, source_lang="en", target_lang="es"):
-    """
-    Attempts to translate text using basic rules (limited functionality).
-    """
-    translation = translations.get(text.lower())
-    if translation and target_lang in translation:
-        return translation[target_lang]
-    else:
-        return "Sorry, I cannot translate that yet."
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.reply_to(message, "Welcome to Language Translator Bot!\n\n"
+                          "Send me a message to translate it to another language.")
 
-def handle_message(update, context):
-    """
-    Handles incoming messages, attempting translation based on limited rules.
-    """
-    chat_id = update.effective_chat.id
-    text = update.message.text
-    translated_text = translate(text)
-    context.bot.send_message(chat_id=chat_id, text=translated_text)
+@bot.message_handler(func=lambda message: True)
+def translate_message(message):
+    try:
+        translator = Translator(from_lang='auto', to_lang='en')  # Translate to English by default
+        translated_text = translator.translate(message.text)
+        bot.reply_to(message, f"Translated Text: {translated_text}")
+    except Exception as e:
+        bot.reply_to(message, f"Sorry, an error occurred: {str(e)}")
 
-def main():
-    """
-    Initializes and starts the bot.
-    """
-    updater = telegram.Updater(token=BOT_TOKEN)
-    dispatcher = updater.dispatcher
-    dispatcher.add_handler(telegram.ext.MessageHandler(telegram.ext.Filters.text, handle_message))
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == "__main__":
-    main()
+# Start the bot
+bot.polling()
