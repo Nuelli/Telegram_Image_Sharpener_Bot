@@ -1,6 +1,9 @@
 import os
 import telebot
 from PIL import Image, ImageFilter
+from keep_alive import keep_alive
+
+keep_alive()
 
 # Replace with your Telegram bot token (get from BotFather)
 BOT_TOKEN = "6962643767:AAGhDTqFYt2rI_9OVWtGxGOdSr4I0uKsof8"
