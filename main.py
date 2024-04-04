@@ -6,7 +6,7 @@ from keep_alive import keep_alive
 keep_alive()
 
 # Replace with your Telegram bot token (get from BotFather)
-BOT_TOKEN = "6962643767:AAGhDTqFYt2rI_9OVWtGxGOdSr4I0uKsof8"
+BOT_TOKEN = "my bot token"
 
 # Create a Telegram bot instance
 bot = telebot.TeleBot(BOT_TOKEN)
